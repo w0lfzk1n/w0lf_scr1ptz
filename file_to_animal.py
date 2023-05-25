@@ -4,7 +4,7 @@ import glob
 import requests
 
 #CORE PATH
-core = "/mnt/usb1/ELEMENTS/"
+core = "ENTER YOUR PATH IN LINE 7"
 path = core + input(f"ENTER A PATH: {core}")
 
 if not os.path.exists(path):
