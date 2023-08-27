@@ -3,6 +3,10 @@ A bunch of my own trainings and stuff I programmed.
 
 *-- @K4k4du is the best --*
 
+**digit_sys_calc.ps1**
+
+  - *Powershellscript that can calculate any OCTADECIMAL, HEXADECIMAL, BINARY and DECIMAL to all the others. (No negative numbers for now)*
+
 **bash_basic.sh**
 
   - *Menu for learning bash unix shell*
