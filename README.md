@@ -3,19 +3,19 @@ A bunch of my own trainings and stuff I programmed.
 
 *-- @K4k4du is the best --*
 
-#Powershell-Dungeon
+# - - Powershell-Dungeon
 
 **digi_sys.ps1**
 
   - *Powershellscript that can calculate any OCTADECIMAL, HEXADECIMAL, BINARY and DECIMAL to all the others. (No negative numbers for now)*
 
-#Bash-Tavern
+# - - Bash-Tavern
 
 **bash_basic.sh**
 
   - *Menu for learning bash unix shell*
 
-#Python-Cave
+# - - Python-Cave
 
 **file_to_animal.py**
 
