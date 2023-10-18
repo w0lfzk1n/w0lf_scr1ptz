@@ -32,3 +32,9 @@ A bunch of my own trainings and stuff I programmed.
 **pass_gen.py**
   
   - *Just a mixer that spits out a string, that should be a safe-to-use password. Nothing more, just stringmixing here*
+
+# - - Java-Cafe
+
+**2048 Console Version**
+
+  - *My very first completed Javaproject (not efficient at all)*
