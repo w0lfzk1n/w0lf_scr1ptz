@@ -35,7 +35,7 @@ A bunch of my own trainings and stuff I programmed.
 
 **-- wordlist.json**
 
-  - *base_path* = Just a json file with a ton of objekts, names and adjectives to build filenames.
+  - *nom, adj, nature_nom, nature_adj,...* = Just a json file with a ton of objekts, names and adjectives to build filenames.
 
 **file_to_thing.py**
 
