@@ -327,14 +327,14 @@ while True:
     error_count = 0
     with open(link_path, "r") as file:
         try:
-            links = file.readlines()  # Lies alle Zeilen in die Liste 'links'
-            total_links = len(links)  # Bestimme die Gesamtzahl der Links
-            processed_links = 0  # Zählvariable für verarbeitete Links
+            links = file.readlines()
+            total_links = len(links)
+            processed_links = 0
 
             for link in links:
                 link = link.strip()
                 if link:
-                    processed_links += 1  # Inkrementiere die Zählvariable
+                    processed_links += 1
                     print(f"{bar}\n[{processed_links}/{total_links}] Verarbeitung von Link...")
                     if is_hashed_link(link):
                         print(f">> {ENC_TAG} - Decrypted link found!")
