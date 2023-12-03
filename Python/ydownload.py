@@ -20,7 +20,6 @@ cnt_failed = 0
 cnt_retry_suc = 0
 cnt_retry_fail = 0
 enc_saved = 0
-cleaner_yeet = 0
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 def format_path(path, redirect_to_source=False):
@@ -256,7 +255,6 @@ def cleanerf():
                 for part_file in part_files:
                     try:
                         os.remove(part_file)
-                        cleaner_yeet += 1
                         print(f"     #> Deleted {part_file}")
                     except OSError as e:
                         print(f"     #> Error deleting {part_file}: {e}")
@@ -337,7 +335,7 @@ while True:
                     processed_links += 1
                     print(f"{bar}\n[{processed_links}/{total_links}] Verarbeitung von Link...")
                     if is_hashed_link(link):
-                        print(f">> {ENC_TAG} - Decrypted link found!")
+                        print(f">> {ENC_TAG} - Encrypted link found!")
                         link = decrypt_link(link)
                         is_avlid = is_valid_url(link)
                         if not is_avlid:
@@ -347,6 +345,12 @@ while True:
                     elif not is_valid_url(link):
                         print(f">> Invalid link: {link}")
                         continue
+                    print(">> Link is valid.")
+
+                    if processed_links % 3 == 0:
+                        print(f">> WAITING 1 Minute now, processed {processed_links} Links.")
+                        time.sleep(60)
+
                     start_time = datetime.datetime.now()
                     filename = gen_name("full", save_path) + ".mp4"
                     cmd = "youtube-dl -o " + os.path.join(save_path, filename) + " " + link
@@ -378,11 +382,15 @@ while True:
     if failed_downloads:
         is_fail = True
         len_failed = len(failed_downloads)
+        processed_failed = 0
         print(f">> {len_failed} Downloads Failed \n Retry failed downloads?\n")
         cleaner = input(">> Y/N? >> ")
         if cleaner.lower() == "y" or cleaner.lower() == "yes" or cleaner.lower() == "j" or cleaner.lower() == "ja":
             for link in failed_downloads:
                 try:
+                    if processed_failed % 3 == 0:
+                        print(f">> WAITING 1 Minute now, processed {processed_failed} Links.")
+                        time.sleep(60)
                     start_time = datetime.datetime.now()
                     print(bar)
                     filename = gen_name("full", save_path) + ".mp4"
@@ -402,6 +410,7 @@ while True:
                     less_detail_string = f"{bar}\nStatus: Retry {res_ok}\nN° {processed_links}/{total_links}\nLink: {link}\nStart: {start_time}"
                     download_details.append(less_detail_string)
                     print(detail_string)
+                    processed_failed += 1
                     time.sleep(5)
                 except KeyboardInterrupt:
                     print("\n\n>>>> KEYBOARDINTERRUPT.\n\nCleaning up *.part files")
