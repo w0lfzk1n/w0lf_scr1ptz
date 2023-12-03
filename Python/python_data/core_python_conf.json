@@ -1,5 +1,6 @@
 {
     "base_path": "EDIT python_data/core_python_conf.json",
+    "secret_phrase": "This is for encryting Things in ytdownload",
     "wordlist_path": "python_data/wordlist.json",
     "ytd_linkpath": "python_data/ytd_links.txt",
     "ytd_save_paths": [
