@@ -1,0 +1,32 @@
+{
+    "base_path": "EDIT python_data/core_python_conf.json",
+    "wordlist_path": "python_data/wordlist.json",
+    "ytd_linkpath": "python_data/ytd_links.txt",
+    "ytd_save_paths": [
+        "EDIT python_data/core_python_conf.json",
+        "Folder in base_path",
+        "Leave base_path empty for base_path full paths"
+    ],
+    "valid_rename_extensions": [
+        ".avi",
+        ".doc",
+        ".docx",
+        ".gif",
+        ".jpeg",
+        ".jpg",
+        ".mkv",
+        ".mov",
+        ".mp3",
+        ".mp4",
+        ".mpeg",
+        ".pdf",
+        ".png",
+        ".rar",
+        ".txt",
+        ".wav",
+        ".zip"
+    ],
+    "rename_exclude_part": [
+        "-poster"
+    ]
+}
