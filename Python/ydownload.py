@@ -5,6 +5,7 @@ import os
 import datetime
 import random
 import json
+import time
 
 logo = "\n██╗   ██╗████████╗██████╗ \n╚██╗ ██╔╝╚══██╔══╝██╔══██╗\n ╚████╔╝    ██║   ██║  ██║\n  ╚██╔╝     ██║   ██║  ██║\n   ██║      ██║   ██████╔╝\n   ╚═╝      ╚═╝   ╚═════╝ "
 bar = "[==================================================]"
@@ -150,13 +151,13 @@ def cleanerf():
     print(f"{bar}\n     CLEANER STARTED")
     for path in paths:
         if os.path.exists(path):
-            print(f"\n   # Running command on {os.path.basename(os.path.normpath(path))}")
+            print(f"\n{bar}\n   # Running command on {os.path.basename(os.path.normpath(path))}")
 
-            # Verwende glob, um alle .part Dateien im aktuellen Pfad zu finden
-            part_files = glob.glob(os.path.join(path, "*.part"))
+            # Verwende glob, um alle *.part und *.ytdl Dateien im aktuellen Pfad zu finden
+            part_files = glob.glob(os.path.join(path, "*.part")) + glob.glob(os.path.join(path, "*.ytdl"))
 
             if part_files:
-                print("     #> Detected *.part File(s) !")
+                print("     #> Detected *.part or *.ytdl File(s) !")
                 for part_file in part_files:
                     try:
                         os.remove(part_file)
@@ -164,8 +165,10 @@ def cleanerf():
                     except OSError as e:
                         print(f"     #> Error deleting {part_file}: {e}")
             else:
-                print("     #> NO *.part File FOUND!")
+                print("     #> NO *.part or *.ytdl Files FOUND!")
+
             print(f"    # $$ COMPLETE :D")
+    print(f"{bar}\n     CLEANER FINISHED\n{bar}")
 
 # ===========================================
 #   Start Actual Skript
@@ -223,7 +226,7 @@ with open(link_path, "r") as f:
                 elif result == 0:
                     res_ok = "OK"
 
-                detail_string = f"\n{bar}\nStatus: {res_ok}\nLink: {link}\nName: {filename}\nPath: {os.path.join(save_path, filename)}\nStart: {start_time}\nEnd  : {end_time}"
+                detail_string = f"\n{bar}\nStatus: {res_ok}\nLink: {link}\nPath: {os.path.join(save_path, filename)}\nStart: {start_time}\nEnd  : {end_time}"
                 download_details.append(detail_string)
                 print(detail_string)
         print(bar)
@@ -235,7 +238,9 @@ with open(link_path, "r") as f:
         exit()
 
 # Versuche fehlgeschlagene Downloads erneut
+is_fail = False
 if failed_downloads:
+    is_fail = True
     len_failed = len(failed_downloads)
     print(f">> {len_failed} Downloads Failed \n Retry failed downloads?\n")
     cleaner = input(">> Y/N? >> ")
@@ -255,9 +260,10 @@ if failed_downloads:
                 elif result == 0:
                     res_ok = "OK"
                     
-                detail_string = f"\n{bar}\nRETRY\nStatus: {res_ok}\nLink: {link}\nName: {filename}\nPath: {os.path.join(save_path, filename)}\nStart: {start_time}\nEnd  : {end_time}\n{bar}"
+                detail_string = f"\n{bar}\nRETRY\nStatus: {res_ok}\nLink: {link}\nPath: {os.path.join(save_path, filename)}\nStart: {start_time}\nEnd  : {end_time}\n{bar}"
                 download_details.append(detail_string)
                 print(detail_string)
+                time.sleep(5)
             except KeyboardInterrupt:
                 print("\n\n>>>> KEYBOARDINTERRUPT.\n\nCleaning up *.part files")
                 cleanerf()
@@ -267,7 +273,11 @@ if failed_downloads:
 
 # Bereinigung und Ausgabe der Download-Details
 os.remove(link_path)
-print("\n\n>> Downloading finished.\nDo you want to clean up all '*.mp4.part' files?")
+if is_fail:
+    f_t = "\nWhich is recommended since some downloads failed."
+else:
+    f_t = ""
+print("\n\n>> Downloading finished.\nDo you want to clean up all '*.mp4.part' files?" + f_t)
 cleaner = input(">> Y/N? >> ")
 if cleaner.lower() == "y" or cleaner.lower() == "yes" or cleaner.lower() == "j" or cleaner.lower() == "ja":
     cleanerf()
